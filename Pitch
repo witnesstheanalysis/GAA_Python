@@ -87,5 +87,6 @@ plt.show()
 
 #Adjust the size and save the pitch as a png file
 #The below can be removed if not saving
+#Change Pitch to rename
 fig.set_size_inches(20, 15.5)
-fig.savefig('test2png.png', dpi=150)
+fig.savefig('Pitch.png', dpi=150)
