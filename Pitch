@@ -13,11 +13,10 @@ contact -
 @author: witnesstheanalysis.com
 """
 
-#GAA Pitch
+#A GAA Pitch for Python
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Arc
-
 
 fig=plt.figure()
 ax=fig.add_subplot(1,1,1)
@@ -42,17 +41,13 @@ plt.plot([131,131],[0,98], color="black", linewidth=.5)
 ##halfway line
 plt.plot([72,72],[39.5,58.5], color="black", linewidth=.5)
 
-
 #Large square
 ##left
 plt.plot([0,13],[39.5,39.5], color="black", linewidth=.5)
 plt.plot([0,13],[58.5,58.5], color="black", linewidth=.5)
-
 ##right
-
 plt.plot([131,144],[39.5,39.5], color="black", linewidth=.5)
 plt.plot([131,144],[58.5,58.5], color="black", linewidth=.5)
-
 
 #small square
 ##left
@@ -70,13 +65,11 @@ plt.plot([11,11],[48.5,49.5], color="black", linewidth=.5)
 ##right
 plt.plot([133,133],[48.5,49.5], color="black", linewidth=.5)
 
-
 #Goals
 ##left
 plt.plot([0,0],[45.75,52.25], color="blue", linewidth= 1)
 ##right
 plt.plot([144,144],[45.75,52.25], color="red", linewidth= 1)
-
 
 #Semi-circle
 ##left
@@ -91,7 +84,6 @@ plt.axis('off')
 
 #Show the pitch
 plt.show()
-
 
 #Adjust the size and save the pitch as a png file
 #The below can be removed if not saving
