@@ -1,0 +1,99 @@
+# -*- coding: utf-8 -*-
+"""
+Created April 2020
+
+contact - 
+    twitter @WtAnalysis
+    email witnesstheanalysis@gmail.com
+    
+    
+** lots of thanks to Fc_Python - https://fcpython.com **
+    
+
+@author: witnesstheanalysis.com
+"""
+
+#GAA Pitch
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Arc
+
+
+fig=plt.figure()
+ax=fig.add_subplot(1,1,1)
+
+#Outside of pitch colour
+fig.patch.set_facecolor('#E0E0E0')
+
+#fc = pitch colour, edgecolor = line colour for the rectangle
+rectangle = plt.Rectangle((0, 0), 144, 98, fc="white", edgecolor="black",linewidth=.5)
+plt.gca().add_patch(rectangle)
+
+#Verticle Pitch Lines
+plt.plot([13,13],[0,98], color="black", linewidth=.5)
+plt.plot([20,20],[0,98], color="black", linewidth=.5)
+plt.plot([45,45],[0,98], color="black", linewidth=.5)
+plt.plot([65,65],[0,98], color="black", linewidth=.5)
+plt.plot([79,79],[0,98], color="black", linewidth=.5)
+plt.plot([99,99],[0,98], color="black", linewidth=.5)
+plt.plot([124,124],[0,98], color="black", linewidth=.5)
+plt.plot([131,131],[0,98], color="black", linewidth=.5)
+
+##halfway line
+plt.plot([72,72],[39.5,58.5], color="black", linewidth=.5)
+
+
+#Large square
+##left
+plt.plot([0,13],[39.5,39.5], color="black", linewidth=.5)
+plt.plot([0,13],[58.5,58.5], color="black", linewidth=.5)
+
+##right
+
+plt.plot([131,144],[39.5,39.5], color="black", linewidth=.5)
+plt.plot([131,144],[58.5,58.5], color="black", linewidth=.5)
+
+
+#small square
+##left
+plt.plot([0,4.5],[42,42], color="black", linewidth=.5)
+plt.plot([0,4.5],[56,56], color="black", linewidth=.5)
+plt.plot([4.5,4.5],[42,56], color="black", linewidth=.5)
+##right
+plt.plot([139.5,144],[42,42], color="black", linewidth=.5)
+plt.plot([139.5,144],[56,56], color="black", linewidth=.5)
+plt.plot([139.5,139.5],[42,56], color="black", linewidth=.5)
+
+#Penalty spot
+##left
+plt.plot([11,11],[48.5,49.5], color="black", linewidth=.5)
+##right
+plt.plot([133,133],[48.5,49.5], color="black", linewidth=.5)
+
+
+#Goals
+##left
+plt.plot([0,0],[45.75,52.25], color="blue", linewidth= 1)
+##right
+plt.plot([144,144],[45.75,52.25], color="red", linewidth= 1)
+
+
+#Semi-circle
+##left
+leftArc = Arc((20,49),height=26,width=26,angle=0,theta1=270,theta2=90,color="black", linewidth=.5)
+ax.add_patch(leftArc)
+##right 
+rightArc = Arc((124,49),height=26,width=26,angle=0,theta1=90,theta2=270,color="black", linewidth=.5)
+ax.add_patch(rightArc)
+
+#Remove axis
+plt.axis('off') 
+
+#Show the pitch
+plt.show()
+
+
+#Adjust the size and save the pitch as a png file
+#The below can be removed if not saving
+fig.set_size_inches(20, 15.5)
+fig.savefig('test2png.png', dpi=150)
