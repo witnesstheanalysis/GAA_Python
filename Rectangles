@@ -1,0 +1,10 @@
+#Adding a rectangle with fill and no border/edge line 
+rectf = plt.Rectangle((0, 39.5), 13, 19, fc="red", edgecolor="none" , alpha = .5)
+plt.gca().add_patch(rectf)
+
+#Adding rectangle with border line (edge colour & line width) and no fill 
+rectnf = plt.Rectangle((47, 20), 48, 40, fc="none", edgecolor="green" ,linewidth=2, alpha = .5)
+plt.gca().add_patch(rectnf)
+
+#Another way of highlighting an area
+ax.axvspan(45, 99, ymin=0.05, ymax=.95, alpha=0.2, color='red')
