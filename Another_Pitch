@@ -1,0 +1,164 @@
+# -*- coding: utf-8 -*-
+"""
+Created April 2020
+
+contact - 
+    twitter @wtanalysis
+    email witnesstheanalysis@gmail.com
+    
+    
+** lots of thanks to Fc_Python - https://fcpython.com **
+    
+
+@author: witnesstheanalysis.com
+"""
+
+#GAA Pitch
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Arc
+
+#A refers to the left side of the pitch
+#B refers to the right side of the pitch
+
+#Pitch dimensions
+hmin = 0
+hmax = 144
+vmin = 0
+vmax = 98
+
+#Line colours and width
+linecol = "blue"
+pitch_col = "white"
+border = "grey"
+edgcol = "black"
+line_wth = 0.5
+
+#Pitch markings 
+a13 = 13
+a20 = 20
+a45 = 45
+a65 = 65
+b65 = 79
+b45 = 99
+b20 = 124
+b13 = 131
+hwl = 72
+
+#Large square
+
+lss = 39.5
+lse = 58.5
+
+#Small square
+
+ssea = 4.5
+sseb = 139.5 
+ssvs = 42
+ssve = 56
+
+#Goals
+goal_A = "blue"
+goal_B = "red"
+gls = 45.75
+gle = 52.25 
+glw = 1.5
+
+#Penalty Spot 
+
+psa = 11
+psb = 133
+pss = 48.5
+pse = 49.5
+
+#Arcs
+
+arcsa = 20
+arcsb = 124
+arce = 49
+hght = 26
+wdth = 26
+ang = 0 
+Atht1 = 270
+Atht2 = 90
+
+#Plot the Pitch
+fig=plt.figure()
+ax=fig.add_subplot(1,1,1)
+
+#Outside of pitch colour
+fig.patch.set_facecolor(border )
+
+#fc = pitch colour, edgecolor = line colour for the rectangle
+rectangle = plt.Rectangle((hmin, vmin), hmax, vmax, fc=pitch_col, edgecolor=edgcol ,linewidth=line_wth)
+plt.gca().add_patch(rectangle)
+
+#Verticle Pitch Lines
+plt.plot([a13,a13],[vmin,vmax], color=linecol, linewidth=line_wth)
+plt.plot([a20,a20],[vmin,vmax], color=linecol, linewidth=line_wth)
+plt.plot([a45,a45],[vmin,vmax], color=linecol, linewidth=line_wth)
+plt.plot([a65,a65],[vmin,vmax], color=linecol, linewidth=line_wth)
+plt.plot([b65,b65],[vmin,vmax], color=linecol, linewidth=line_wth)
+plt.plot([b45,b45],[vmin,vmax], color=linecol, linewidth=line_wth)
+plt.plot([b20,b20],[vmin,vmax], color=linecol, linewidth=line_wth)
+plt.plot([b13,b13],[vmin,vmax], color=linecol, linewidth=line_wth)
+
+##halfway line
+plt.plot([hwl,hwl],[lss,lse], color=linecol, linewidth=line_wth)
+
+
+#Large square
+##left
+plt.plot([hmin,a13],[lss,lss], color=linecol, linewidth=line_wth)
+plt.plot([hmin,a13],[lse,lse], color=linecol, linewidth=line_wth)
+
+##right
+
+plt.plot([b13,hmax],[lss,lss], color=linecol, linewidth=line_wth)
+plt.plot([b13,hmax],[lse,lse], color=linecol, linewidth=line_wth)
+
+
+#small square
+##left
+plt.plot([hmin,ssea],[ssvs,ssvs], color=linecol, linewidth=line_wth)
+plt.plot([hmin,ssea],[ssve,ssve], color=linecol, linewidth=line_wth)
+plt.plot([ssea,ssea],[ssvs,ssve], color=linecol, linewidth=line_wth)
+##right
+plt.plot([sseb,hmax],[ssvs,ssvs], color=linecol, linewidth=line_wth)
+plt.plot([sseb,hmax],[ssve,ssve], color=linecol, linewidth=line_wth)
+plt.plot([sseb,sseb],[ssvs,ssve], color=linecol, linewidth=line_wth)
+
+#Penalty spot
+##left
+plt.plot([psa,psa],[pss,pse], color=linecol, linewidth=line_wth)
+##right
+plt.plot([psb,psb],[pss,pse], color=linecol, linewidth=line_wth)
+
+
+#Goals
+##left
+plt.plot([hmin,hmin],[gls,gle], color=goal_A, linewidth= glw)
+##right
+plt.plot([hmax,hmax],[gls,gle], color=goal_B, linewidth= glw)
+
+
+#Semi-circle
+##left
+leftArc = Arc((arcsa,arce),height=hght,width=wdth,angle=ang,theta1=Atht1,theta2=Atht2,color=linecol, linewidth=line_wth)
+ax.add_patch(leftArc)
+##right 
+rightArc = rightArc = Arc((arcsb,arce),height=hght,width=wdth,angle=ang,theta1=Atht2,theta2=Atht1,color=linecol, linewidth=line_wth)
+ax.add_patch(rightArc)
+
+
+#Remove axis
+plt.axis("off") 
+
+#Show the pitch
+plt.show()
+
+
+#Adjust the size and save the pitch as a png file
+#The below can be removed if not saving
+#fig.set_size_inches(20, 15.5)
+#fig.savefig("Pitch_Test.png", dpi=150)
