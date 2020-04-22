@@ -1,0 +1,27 @@
+
+import pandas as pd 
+import numpy as np
+from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
+  
+# initialize list of lists 
+data = [[25, 30],[75,80],[120,125]] 
+  
+# Create the pandas DataFrame 
+df = pd.DataFrame(data, columns = ['Start', 'End']) 
+  
+# print dataframe. 
+print (df)
+
+start=np.array(df['Start'])
+end=np.array(df['End'])
+
+for i in range(len(df)):
+    if(i!=0):
+        start_lim = start[i] - 5
+    else:
+        start_lim = start[i] 
+    end_lim   = end[i]   
+    filename="D:\gamemys" + str(i+1) + ".mkv"
+    ffmpeg_extract_subclip("C:/Users/pathtofile/"+"name.mkv",start_lim,end_lim,targetname=filename)
+
+print ("Clips Saved")
