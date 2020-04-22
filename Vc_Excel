@@ -1,0 +1,20 @@
+import pandas as pd
+df = pd.read_excel (r"C:/Users/pathtofile.xlsx")
+print (df)
+
+import numpy as np
+
+from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
+start=np.array(df["Start"])
+end=np.array(df["End"])
+
+for i in range(len(df)):
+    if(i!=0):
+        start_lim = start[i] - 2
+    else:
+        start_lim = start[i] 
+    end_lim   = end[i]   
+    filename = "D:\gamex" + str(df.iloc[i,1]) + str(df.iloc[i, 2]) + str(i+1) + ".mp4"
+    ffmpeg_extract_subclip("C:/pathtofile/"+"name.mkv",start_lim,end_lim,targetname=filename)
+
+print ("File Saved")
