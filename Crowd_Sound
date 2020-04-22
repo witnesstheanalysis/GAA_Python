@@ -1,0 +1,103 @@
+import librosa
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import IPython.display as ipd
+from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
+
+#Set path and file name 
+path="C:/Users/pathtofile/"
+filename='gamemysfca1.wav'
+
+
+x, sr = librosa.load(path+filename,sr=16000)
+
+
+int(librosa.get_duration(x, sr)/60)
+
+max_slice=5
+window_length = max_slice * sr
+
+#if compliling in a notebook you can listen to a clip
+a=x[5*window_length:7*window_length]
+ipd.Audio(a, rate=sr)
+
+energy = sum(abs(a**2))
+print(energy)
+
+
+len(a)
+
+#shows a plot of the above clip
+fig = plt.figure(figsize=(14, 8))
+ax1 = fig.add_subplot(211)
+ax1.set_xlabel('time')
+ax1.set_ylabel('Amplitude')
+ax1.plot(a)
+
+
+energy = np.array([sum(abs(x[i:i+window_length]**2)) for i in range(0, len(x), window_length)])
+
+energy
+
+#from the histogram you can identify the threshold for the increase in noise
+plt.hist(energy)
+plt.show()
+
+#Create the data frame from the parts above the threshold
+df=pd.DataFrame(columns=['energy','start','end'])
+
+#set the threshpld this may take a bit of tinkering with to get right
+thresh=60
+row_index=0
+for i in range(len(energy)):
+    value=energy[i]
+    if(value>=thresh):
+        i=np.where(energy == value)[0]
+        df.loc[row_index,'energy']=value
+        df.loc[row_index,'start']=i[0] *5
+        df.loc[row_index,'end']=(i[0]+1)*5
+        row_index= row_index + 1
+        
+#check the dataframe       
+df
+
+
+#connect parts together that exceed the threshold
+temp=[]
+i=0
+j=0
+n=len(df) - 2
+m=len(df) - 1
+while(i<=n):
+    j=i+1
+    while(j<=m):
+        if(df['end'][i] == df['start'][j]):
+            df.loc[i,'end'] = df.loc[j,'end']
+            temp.append(j)
+            j=j+1
+        else:
+            i=j
+            break
+        
+        
+df.drop(temp,axis=0,inplace=True)
+
+#check the dataframe   
+df
+
+
+start=np.array(df["start"])
+end=np.array(df["end"])
+
+#the number after the start_lim is how long before the start time the video will start
+for i in range(len(df)):
+    if(i!=0):
+        start_lim = start[i] - 5
+    else:
+        start_lim = start[i] 
+    end_lim   = end[i]   
+    filename = "D:\gamebs" + str(i+1) + ".mkv"
+    ffmpeg_extract_subclip("C:/Users/pathtofile/"+"gamemysfca1.mp4",start_lim,end_lim,targetname=filename)
+
+print ("Clips Saved")
