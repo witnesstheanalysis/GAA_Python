@@ -1,0 +1,98 @@
+"""
+Created April 2020
+
+contact - 
+    twitter @wtanalysis
+    email witnesstheanalysis@gmail.com
+    
+    
+** lots of thanks to Fc_Python - https://fcpython.com **
+    
+
+@author: witnesstheanalysis.com
+"""
+
+#A GAA Pitch for Python
+#Different Dimensions
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Arc
+
+fig=plt.figure()
+ax=fig.add_subplot(1,1,1)
+
+#Outside of pitch colour
+fig.patch.set_facecolor('lightblue')
+
+#Pitch Lines colour
+pl = "white"
+
+#fc = pitch colour, edgecolor = line colour for the rectangle
+rectangle = plt.Rectangle((0, 0), 144, 88, fc="green", edgecolor= pl ,linewidth=.5)
+plt.gca().add_patch(rectangle)
+
+#Verticle Pitch Lines 
+plt.plot([13,13],[0,88], color= pl, linewidth=.5)
+plt.plot([20,20],[0,88], color= pl, linewidth=.5)
+plt.plot([45,45],[0,88], color= pl, linewidth=.5)
+plt.plot([65,65],[0,88], color= pl, linewidth=.5)
+plt.plot([79,79],[0,88], color= pl, linewidth=.5)
+plt.plot([99,99],[0,88], color= pl, linewidth=.5)
+plt.plot([124,124],[0,88], color= pl, linewidth=.5)
+plt.plot([131,131],[0,88], color= pl, linewidth=.5)
+
+##halfway line
+plt.plot([72,72],[40.75,47.25], color= pl, linewidth=.5)
+
+#Large square
+##left
+plt.plot([0,13],[34.5,34.5], color=pl, linewidth=.5)
+plt.plot([0,13],[53.5,53.5], color=pl, linewidth=.5)
+##right
+plt.plot([131,144],[34.5,34.5], color=pl, linewidth=.5)
+plt.plot([131,144],[53.5,53.5], color=pl, linewidth=.5)
+
+#small square
+##left
+plt.plot([0,4.5],[37,37], color= pl, linewidth=.5)
+plt.plot([0,4.5],[51,51], color= pl, linewidth=.5)
+plt.plot([4.5,4.5],[37,51], color= pl, linewidth=.5)
+##right
+plt.plot([139.5,144],[37,37], color= pl, linewidth=.5)
+plt.plot([139.5,144],[51,51], color= pl, linewidth=.5)
+plt.plot([139.5,139.5],[37,51], color= pl, linewidth=.5)
+
+#Penalty spot
+##left
+plt.plot([11,11],[43.5,44.5], color= pl, linewidth=.5)
+##right
+plt.plot([133,133],[43.5,44.5], color= pl, linewidth=.5)
+
+#Goals
+#Goal Colour
+GoalA = "blue"
+GoalB = "red"
+##left
+plt.plot([0,0],[40.75,47.25], color= GoalA, linewidth= 1)
+##right
+plt.plot([144,144],[40.75,47.25], color= GoalB, linewidth= 1)
+
+#Semi-circle
+##left
+leftArc = Arc((20,44),height=26,width=26,angle=0,theta1=270,theta2=90,color= pl, linewidth=.5)
+ax.add_patch(leftArc)
+##right 
+rightArc = Arc((124,44),height=26,width=26,angle=0,theta1=90,theta2=270,color= pl, linewidth=.5)
+ax.add_patch(rightArc)
+
+#Remove axis
+plt.axis('off') 
+
+#Show the pitch
+plt.show()
+
+#Adjust the size and save the pitch as a png file
+#Remove # to change size and save
+#Change 'Pitch' to rename
+#fig.set_size_inches(20, 15.5)
+#fig.savefig('Pitch.png', dpi=150)
